@@ -79,28 +79,63 @@
     //
     // test if a specific row on this board contains a conflict
       
-    // console.log();
-        console.log('edef');
+    
     hasRowConflictAt: function(rowIndex) {
+      // if(hasAnyRowConflicts()){
+
+
+      // }
       //iterate through each row index of our board object, starting at 0
-      for(var i = 0; i < board[rowIndex].length; i++){
-        //check to see if any other index contains a value that is not 0
-          if(board[rowIndex][i] !== 0){
-            return true;
-          }
-          //return true
-      }
+      // for(var i = 0; i < board[rowIndex].length; i++){
+      //console.log('edef');
+      //   //check to see if any other index contains a value that is not 0
+      //     if(board[rowIndex][i] !== 0){
+      //       return true;
+      //     }
+      //     //return true
+      // }
       return false; // fixme
     },
+    keyVal: [],
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      //iterate through _currentAttributes row
+      
+      var count = 0;
+        for(var i in this._currentAttributes){
+          // console.log("cordinates", this._currentAttributes[i]);
+          if(typeof this._currentAttributes[i] !== 'number') {
+            for(var j = 0; j < this._currentAttributes[i].length; j++){
+          // console.log('value', this._currentAttributes[i][j]);
+              if(this._currentAttributes[i][j] !== 0){
+                count++;
+                var key = this._currentAttributes[i];
+                var val = j;
+                this.keyVal.push();
+                  // console.log('keyVal',this.keyVal);
+                // console.log(this._currentAttributes);
+              }
+              // console.log('count:'count);
+              }
+            }
+          }
+                if(count > 1){
+                  return true;
+                } else {
+                  return false;
+                }
+      // return found;
+
+      // console.log(this._currentAttributes);
+        //iterate through the values inside of the rows
+          //if _currentAttributes[i][j] !== 0
+      // return false; // fixme
     },
 
 
 
-    // COLUMNS - run from top to bottom
+    // COLUMNS - run from top to bottom[
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
@@ -110,6 +145,23 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+  //console.log('current attribute', this._currentAttributes);
+    var k = 0;
+    for (var i in this._currentAttributes){
+      if (typeof i !== 'number'){
+        for (var j=0; j < this._currentAttributes.n; j++) {
+
+            console.log('reverse',this._currentAttributes[k][j]);
+            console.log('j:', j);
+            console.log('k:', k);
+            k++;
+        }
+        
+      }
+    }
+
+
+
       return false; // fixme
     },
 
@@ -155,8 +207,10 @@
       });
     });
   };
-    var board = new Board();
-    _.extend(board, makeEmptyMatrix(5));
-    console.log("this is board", board);
+
+  //   var board = new Board({n:5});
+  // _.extend(board, makeEmptyMatrix(5));
+  //   console.log("this is board", makeEmptyMatrix(5));
+  //   console.log("this is the real board", board);
 
 }());
