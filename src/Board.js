@@ -5,7 +5,7 @@
 (function() {
 
   window.Board = Backbone.Model.extend({
-
+// console.log(this.Board);
     initialize: function (params) {
       if (_.isUndefined(params) || _.isNull(params)) {
         console.log('Good guess! But to use the Board() constructor, you must pass it an argument in one of the following formats:');
@@ -78,7 +78,18 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
+      
+    // console.log();
+        console.log('edef');
     hasRowConflictAt: function(rowIndex) {
+      //iterate through each row index of our board object, starting at 0
+      for(var i = 0; i < board[rowIndex].length; i++){
+        //check to see if any other index contains a value that is not 0
+          if(board[rowIndex][i] !== 0){
+            return true;
+          }
+          //return true
+      }
       return false; // fixme
     },
 
@@ -144,5 +155,8 @@
       });
     });
   };
+    var board = new Board();
+    _.extend(board, makeEmptyMatrix(5));
+    console.log("this is board", board);
 
 }());
