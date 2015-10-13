@@ -144,7 +144,7 @@
     var k = 0;
     var count = 0;
     for (var i in this._currentAttributes){
-      if (typeof i !== 'number'){
+      if (typeof this._currentAttributes[i] !== 'number'){
         for (var j=0; j < this._currentAttributes[i].length; j++) {
           if (this._currentAttributes[j][k] !== 0){
             count++;
@@ -180,6 +180,18 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+      var arr = [];
+      for (var i in this._currentAttributes){
+        if(typeof this._currentAttributes[i] !== 'number') {
+          for (var j=0; j<this._currentAttributes[i].length; j++){
+            if(this._currentAttributes[i][j] !==0){
+              arr.push(i - j);
+              
+            }
+              console.log(arr);
+            }
+          }
+        }
       return false; // fixme
     },
 
