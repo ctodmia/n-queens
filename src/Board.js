@@ -186,6 +186,7 @@
           for (var j=0; j<this._currentAttributes[i].length; j++){
             if(this._currentAttributes[i][j] !==0){
               arr.push(i - j);
+              
               if(_.uniq(arr).length !== arr.length){
                 // console.log(arr);
                 return true; 
