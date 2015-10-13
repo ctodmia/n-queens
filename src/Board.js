@@ -182,7 +182,7 @@
     hasAnyMajorDiagonalConflicts: function() {
       var arr = [];
       for (var i in this._currentAttributes){
-        if(typeof this._currentAttributes[i] !== 'number') {
+        // if(typeof this._currentAttributes[i] !== 'number') {
           for (var j=0; j<this._currentAttributes[i].length; j++){
             if(this._currentAttributes[i][j] !==0){
               arr.push(i - j);
@@ -191,7 +191,7 @@
                 return true; 
               }
             }
-          } 
+          // } 
         }
       }    
       return false; // fixme
@@ -211,7 +211,7 @@
     hasAnyMinorDiagonalConflicts: function() {
           var arr = [];
       for (var i in this._currentAttributes){
-        if(typeof this._currentAttributes[i] !== 'number') {
+        // if(typeof this._currentAttributes[i] !== 'number') {
           for (var j=0; j<this._currentAttributes[i].length; j++){
             if(this._currentAttributes[i][j] !==0){
               arr.push(i*1 + j);
@@ -221,7 +221,7 @@
               }
             }
           } 
-        }
+        // }
       }    
 
       return false; // fixme
@@ -239,9 +239,9 @@
       });
     });
   };
-
-  //   var board = new Board({n:5});
-  // _.extend(board, makeEmptyMatrix(5));
+  //var board = new Board({n:5})
+   // console.log('this', board);
+  // _.extend(Board, makeEmptyMatrix(5));
   //   console.log("this is board", makeEmptyMatrix(5));
   //   console.log("this is the real board", board);
 
