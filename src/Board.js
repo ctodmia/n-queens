@@ -186,12 +186,14 @@
           for (var j=0; j<this._currentAttributes[i].length; j++){
             if(this._currentAttributes[i][j] !==0){
               arr.push(i - j);
-              
+              if(_.uniq(arr).length !== arr.length){
+                // console.log(arr);
+                return true; 
+              }
             }
-              console.log(arr);
-            }
-          }
+          } 
         }
+      }    
       return false; // fixme
     },
 
@@ -207,6 +209,21 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+          var arr = [];
+      for (var i in this._currentAttributes){
+        if(typeof this._currentAttributes[i] !== 'number') {
+          for (var j=0; j<this._currentAttributes[i].length; j++){
+            if(this._currentAttributes[i][j] !==0){
+              arr.push(i*1 + j);
+                //console.log(arr);
+              if(_.uniq(arr).length !== arr.length){
+                return true; 
+              }
+            }
+          } 
+        }
+      }    
+
       return false; // fixme
     }
 

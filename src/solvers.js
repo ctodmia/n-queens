@@ -15,7 +15,17 @@
 
 window.findNRooksSolution = function(n) {
   var solution = undefined; //fixme
+    var makeEmptyMatrix = function(n) {
+    return _(_.range(n)).map(function() {
+      return _(_.range(n)).map(function() {
+        return 0;
+      });
 
+    });
+  };
+ 
+  console.log('makeEmptyMatrix', makeEmptyMatrix(5));
+  console.log('solutionboard', solutionboard);
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
 };
