@@ -110,21 +110,16 @@
           // console.log('value', this._currentAttributes[i][j]);
               if(this._currentAttributes[i][j] !== 0){
                 count++;
-                var key = this._currentAttributes[i];
-                var val = j;
-                this.keyVal.push();
-                  // console.log('keyVal',this.keyVal);
-                // console.log(this._currentAttributes);
-              }
-              // console.log('count:'count);
-              }
-            }
-          }
                 if(count > 1){
                   return true;
-                } else {
-                  return false;
-                }
+                } 
+              }
+              }
+              count=0;
+            }
+          }
+          return false;
+          
       // return found;
 
       // console.log(this._currentAttributes);
@@ -147,22 +142,30 @@
     hasAnyColConflicts: function() {
   //console.log('current attribute', this._currentAttributes);
     var k = 0;
+    var count = 0;
     for (var i in this._currentAttributes){
       if (typeof i !== 'number'){
-        for (var j=0; j < this._currentAttributes.n; j++) {
-
-            console.log('reverse',this._currentAttributes[k][j]);
-            console.log('j:', j);
-            console.log('k:', k);
-            k++;
+        for (var j=0; j < this._currentAttributes[i].length; j++) {
+          if (this._currentAttributes[j][k] !== 0){
+            count++;
+            if(count > 1){
+              return true;
+            }
+          }
+          }
+          count = 0;
+          k++;
         }
-        
       }
-    }
+      return false;
 
 
 
-      return false; // fixme
+            // console.log('reverse',this._currentAttributes[j][k]);
+            // console.log('count', count);
+      // return false; // fixme
+            // console.log('j:', j);
+            // console.log('k:', k);
     },
 
 
