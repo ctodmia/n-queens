@@ -12,10 +12,35 @@
 
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
+window.findSolution = function(row, n, board, validator, callback){
+
+  //if all rows exhausted
+  if (row === n) {
+    //increment solution
+    callback();
+    //stop
+    return;
+  }
+  //iterate over possible decisions
+  for (var i = 0; i < n; i++) {
+    //place a piece
+    board.togglePiece(row, i);
+    // conditional that prevents from happening if conflict
+    if(!board[validator]()){
+      // recurse into remaining problems
+      findSolution(row+1, n, board, validator, callback);
+      //unplace piece
+    }
+      board.togglePiece(row, i);
+  }
+  
+};
+
 
 window.findNRooksSolution = function(n) {
   var solution = new makeEmptyMatrix(n);  //fixme
   for(var i = n; i > 0; i--){
+
     solution[n - i][n - i] = 1;
   }
 
@@ -50,7 +75,8 @@ window.countNRooksSolutions = function(n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
-  var solution = new makeEmptyMatrix(n); //fixme
+  var board = new Board({n:n}); //fixme
+  var solution = board.rows();
   // var recurse = function (){
   //     recurse();
   //   }
@@ -70,6 +96,12 @@ window.findNQueensSolution = function(n) {
   //       i++;
   //       j = 0;
   //     }
+
+  findSolution(0, n, board, "hasAnyQueensConflicts", function(){
+    solution = _.map(board.rows(), function(row){
+      return row.slice();
+    });
+  });
       // console.log('i, j, solution', i,j, solution);
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
     //}
@@ -92,34 +124,13 @@ window.countNQueensSolutions = function(n) {
 //should be returning 1
 
 
-var findSolution = function(row){
-
-  //if all rows exhausted
-  if (row === n) {
-    //increment solution
-    solutionCount++;
-    //stop
-    return;
-  }
-  //iterate over possible decisions
-  for (i = 0; i < n; i++) {
-    //place a piece
-    board.togglePiece(row, i);
-    // conditional that prevents from happening if conflict
-    if( !board.hasAnyQueensConflicts ){
-      // recurse into remaining problems
-      findSolution(row++);
-      //unplace piece
-      board.togglePiece(row, i);
-      
-    }
-  }
-  
-}
-findSolution(0);
+    // debugger;
+      console.log('solutionCount',solutionCount)
+findSolution(0, n, board, "hasAnyQueensConflicts", function(){
+  solutionCount++;});
 
 
-console.log('this is our board', board);
+// console.log('this is our board', board);
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
 };

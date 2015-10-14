@@ -181,6 +181,7 @@
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       var arr = [];
+
       for (var i in this._currentAttributes){
         // if(typeof this._currentAttributes[i] !== 'number') {
           for (var j=0; j<this._currentAttributes[i].length; j++){
