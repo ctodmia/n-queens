@@ -51,19 +51,83 @@ window.countNRooksSolutions = function(n) {
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
   var solution = new makeEmptyMatrix(n); //fixme
-  solution = 0;
+  // var recurse = function (){
+  //     recurse();
+  //   }
+  // };
+
+  // if(n === 1 ){
+  //   solution[0][0] = 1;
+  // } else if(n > 1) {
+  //   var i = 0;
+  //   var j = 1;
+  //   for(var k = n; k >= 0; k--){
+  //     solution[i][j] = 1;
+  //     if(j < n - 2){
+  //       i++;
+  //       j += 2;
+  //     } else {
+  //       i++;
+  //       j = 0;
+  //     }
+      // console.log('i, j, solution', i,j, solution);
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
+    //}
+    // recurse();
+ // }
   return solution;
+
 };
 
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
-  var solutionCount = undefined; //fixme
 
+    // debugger;
+  var solutionCount = 0; //fixme
+  var board = new Board({n:n});
+
+
+//returning 0 when n is 1, 
+//should be returning 1
+
+
+var findSolution = function(row){
+
+  //if all rows exhausted
+  if (row === n) {
+    //increment solution
+    solutionCount++;
+    //stop
+    return;
+  }
+  //iterate over possible decisions
+  for (i = 0; i < n; i++) {
+    //place a piece
+    board.togglePiece(row, i);
+    // conditional that prevents from happening if conflict
+    if( !board.hasAnyQueensConflicts ){
+      // recurse into remaining problems
+      findSolution(row++);
+      //unplace piece
+      board.togglePiece(row, i);
+      
+    }
+  }
+  
+}
+findSolution(0);
+
+
+console.log('this is our board', board);
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
 };
+    
+
+
+
+
     var makeEmptyMatrix = function(n) {
     return _(_.range(n)).map(function() {
       return _(_.range(n)).map(function() {
